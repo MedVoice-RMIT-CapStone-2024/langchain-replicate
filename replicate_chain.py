@@ -76,15 +76,15 @@ json_schema="""{
 system_prompt = f"""You are an AI that summarizes medical conversations into a structured JSON format like this{json_schema}. 
 Given the medical transcript below, provide a summary by extracting key-value pairs. Only use the information explicitly mentioned 
 in the transcript, and you must not infer or assume any details that are not directly stated, and strictly follow what the json schema required, 
-and print the json schema only."""
+and print the JSON schema only. If the transcript has no medical information, please still proceed to print out an empty JSON schema."""
 
 input_transcript = """
-Speaker 1: Good morning, Nurse. Could you please update me on the status of our patient, Mr. Anderson?
-Speaker 2: Good morning, Doctor. Mr. Anderson's blood pressure has stabilized at 100/70. His blood glucose level this morning was 8 mmol/L.
-Speaker 1: That's good to hear. Has he taken his medication for the morning?
-Speaker 2: Yes, Doctor. He took his Metformin at 7 AM, as prescribed.
-Speaker 1: Excellent. Please continue to monitor his vitals and let me know if there are any significant changes.
-Speaker 2: Absolutely, Doctor. I'll keep you updated.
+Speaker 1: Good morning. Could you please update me on the status of our project, Mr. Anderson? 
+Speaker 2: Good morning. Mr. Anderson’s project progress has stabilized and is on track. His report this morning showed an 8% increase in efficiency. 
+Speaker 1: That’s good to hear. Has he completed his tasks for the morning? 
+Speaker 2: Yes. He finished his analysis at 7 AM, as scheduled. 
+Speaker 1: Excellent. Please continue to monitor his progress and let me know if there are any significant developments. 
+Speaker 2: Absolutely. I’ll keep you informed of any updates.
 """
 prompt = f"""
 System: {system_prompt}
