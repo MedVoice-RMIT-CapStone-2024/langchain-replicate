@@ -15,16 +15,16 @@ REPLICATE_API_TOKEN = os.getenv("REPLICATE_API_TOKEN")
 json_schema="""{
   "type": "object",
   "properties": {
-    "name": {
+    "patient_name": {
       "type": "string"
     },
-    "age": {
+    "patient_age": {
       "type": "integer"
     },
-    "gender": {
+    "patient_gender": {
       "type": "string"
     },
-    "diagnosis": {
+    "medical_diagnosis": {
       "type": "array",
       "items": {
         "type": "object",
@@ -36,7 +36,7 @@ json_schema="""{
         "required": ["name"]
       }
     },
-    "treatment": {
+    "medical_treatment": {
       "type": "array",
       "items": {
         "type": "object",
@@ -51,12 +51,12 @@ json_schema="""{
         "required": ["name", "prescription"]
       }
     },
-    "vital": {
+    "health_vital": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "name": {
+          "status": {
             "type": "string"
           },
           "value": {
@@ -66,23 +66,24 @@ json_schema="""{
             "type": "string"
           }
         },
-        "required": ["name", "value", "units"]
+        "required": ["status"]
       }
     }
   },
-  "required": ["name", "gender", "treatment", "vital"]
+  "required": ["name", "gender", "medical_treatment", "health_vital"]
 }"""
 
 system_prompt = f"""You are an AI that summarizes medical conversations into a structured JSON format like this{json_schema}. 
-Given the medical transcript below, provide a summary by extracting key-value pairs. Only use the information explicitly mentioned 
-in the transcript, and you must not infer or assume any details that are not directly stated, and strictly follow what the json schema required, 
-and print the JSON schema only. If the transcript has no medical information, please still proceed to print out an empty JSON schema."""
+Given the medical transcript below, provide a medical summary by extracting key-value pairs. Only use the information explicitly mentioned 
+in the transcript, and you must not infer or assume any details that are not directly stated. Strictly follow what the json schema required, 
+and print the JSON schema only. If the transcript has no medical information, you must still proceed to print out a JSON schema. 
+You must ensure that the 'medical_diagnosis', 'medical_treatment', and 'health_vital' fields contain valid medical terms recognized in medical practice."""
 
 input_transcript = """
 Speaker 1: Good morning. Could you please update me on the status of our project, Mr. Anderson? 
-Speaker 2: Good morning. Mr. Anderson’s project progress has stabilized and is on track. His report this morning showed an 8% increase in efficiency. 
+Speaker 2: Good morning. Mr. Anderson’s project progress has stabilized and is on track, even though he is already 70 years old. His report this morning showed an 8% increase in efficiency. 
 Speaker 1: That’s good to hear. Has he completed his tasks for the morning? 
-Speaker 2: Yes. He finished his analysis at 7 AM, as scheduled. 
+Speaker 2: Yes. He finished his treatment at 7 AM, as scheduled. 
 Speaker 1: Excellent. Please continue to monitor his progress and let me know if there are any significant developments. 
 Speaker 2: Absolutely. I’ll keep you informed of any updates.
 """
