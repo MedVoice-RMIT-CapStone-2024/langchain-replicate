@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from langchain.chains import LLMChain
-from langchain_community.llms import Replicate
+from langchain_community.llms import Replicate, Ollama 
 from langchain_core.prompts import PromptTemplate
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
@@ -92,21 +92,21 @@ System: {system_prompt}
 User: {input_transcript}
 Assistant:
 """
-llm = Replicate(
-    streaming=True,
-    callbacks=[StreamingStdOutCallbackHandler()],
-    model="meta/meta-llama-3-70b-instruct",
-    model_kwargs= {
-        "top_k": 0,
-        "top_p": 0.9,
-        "max_tokens": 512,
-        "min_tokens": 0,
-        "temperature": 0.6,
-        "length_penalty": 1,
-        "stop_sequences": "<|end_of_text|>,<|eot_id|>",
-        "presence_penalty": 1.15,
-        "log_performance_metrics": False}, 
-        )
-
+# llm = Replicate(
+#     streaming=True,
+#     callbacks=[StreamingStdOutCallbackHandler()],
+#     model="meta/meta-llama-3-70b-instruct",
+#     model_kwargs= {
+#         "top_k": 0,
+#         "top_p": 0.9,
+#         "max_tokens": 512,
+#         "min_tokens": 0,
+#         "temperature": 0.6,
+#         "length_penalty": 1,
+#         "stop_sequences": "<|end_of_text|>,<|eot_id|>",
+#         "presence_penalty": 1.15,
+#         "log_performance_metrics": False}, 
+#         )
+llm = Ollama(model="llama3:70b", temperature=0)
 _ = llm.invoke(prompt)
 
