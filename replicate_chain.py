@@ -1,15 +1,15 @@
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from langchain.chains import LLMChain
 from langchain_community.llms import Replicate, Ollama 
 from langchain_core.prompts import PromptTemplate
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
-# Load environment variables from .env file
-load_dotenv()
+# # Load environment variables from .env file
+# load_dotenv()
 
-# Get the API token from environment variable
-REPLICATE_API_TOKEN = os.getenv("REPLICATE_API_TOKEN")
+# # Get the API token from environment variable
+# REPLICATE_API_TOKEN = os.getenv("REPLICATE_API_TOKEN")
 
 # Get the prompt from the command line argument
 json_schema="""{
