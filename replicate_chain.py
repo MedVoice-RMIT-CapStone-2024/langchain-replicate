@@ -107,7 +107,7 @@ Assistant:
 #         "presence_penalty": 1.15,
 #         "log_performance_metrics": False}, 
 #         )
-llm = Ollama(model="llama3:70b", temperature=0)
+llm = Ollama(model="llama3", temperature=0)
 _ = llm.invoke(prompt)
 
 print(_)
