@@ -73,11 +73,11 @@ json_schema="""{
   "required": ["name", "gender", "medical_treatment", "health_vital"]
 }"""
 
-system_prompt = f"""You are an AI that summarizes medical conversations into a structured JSON format like this{json_schema}. 
-Given the medical transcript below, provide a medical summary by extracting key-value pairs. Only use the information explicitly mentioned 
-in the transcript, and you must not infer or assume any details that are not directly stated. Strictly follow what the json schema required, 
-and print the JSON schema only. If the transcript has no medical information, you must still proceed to print out a JSON schema. 
-You must ensure that the 'medical_diagnosis', 'medical_treatment', and 'health_vital' fields contain valid medical terms recognized in medical practice."""
+system_prompt = f"""You are an AI assisstant that summarizes medical transcript into a structured JSON format like this: {json_schema}. 
+    Analyze the medical transcript provided. If multiple speakers are present, focus on summarizing patient-related information only from the speaker discussing patient details. 
+    Summarize this information into a key-value pairs, adhering to the schema provided. If no patient-related information is present, return an JSON schema with empty values. 
+    Adhere to the schema, ensuring the use of explicit information and recognized medical terminology. Follow the JSON schema strictly without making assumptions about unspecified details. 
+    You must only return the JSON schema."""
 
 input_transcript = """
 Speaker 1: Good morning. Could you please update me on the status of our project, Mr. Anderson? 
