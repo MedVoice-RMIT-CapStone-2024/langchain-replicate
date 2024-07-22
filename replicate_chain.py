@@ -110,3 +110,4 @@ Assistant:
 llm = Ollama(model="llama3:70b", temperature=0)
 _ = llm.invoke(prompt)
 
+print(_)
